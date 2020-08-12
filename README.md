@@ -2,6 +2,12 @@
 
 ## Usage
 
+Pre-run (local)
+
+```shell
+$ sh scripts/generate_docker_xauth.sh
+```
+
 Start
 
 ```shell
