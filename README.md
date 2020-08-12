@@ -102,3 +102,31 @@ Generate the xauth file manually using the following command.
 ```shell
 $ xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f /tmp/.docker.xauth nmerge -
 ```
+
+### 3. Rendering
+
+The window is displayed, but it is completely black or white.
+
+If the nvidia GPU driver is installed, make sure you are using the ```nvidia/docker-compose.yml```.
+
+Change the ```command``` of the docker-compose.yml file as follows.
+
+```yaml
+command: /bin/sh -c "ign gazebo -v4 tunnel.sdf"
+```
+to
+```yaml
+command: /bin/sh -c "ign gazebo -v4 lights.sdf"
+```
+
+If the window appears normally in the above operation, the version of OpenGL used to display the screen may be older.
+
+You can check the version of OpenGL with the following command.
+
+```shell
+$ glxinfo | grep :
+```
+
+The **ogre2** rendering engine used in ignition gazebo requires OpenGL version **3.3** or higher.
+
+If the OpenGL version is lower than **3.3**, you can change the rendering engine to **ogre**.
